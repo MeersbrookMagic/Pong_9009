@@ -90,6 +90,7 @@ function updatebat2() {
 
 
 function logKey(e) {
+  // Not a bug!  (will not fix)
   // One of the unique super-amazing features of this game, is that the 
   // ball always goes faster to the right whenever any key at all 
   // is pressed, including 'left' ('a') and 'brake' ('e')
@@ -126,10 +127,11 @@ function logKey(e) {
     batSpeedX = -speedLimitX
   }
 
-  
+  // NOT A BUG! (  not fix)
   // One of the unique super-amazing features of this game, is that 
   // bat2 always goes faster to the left whenever any key at all 
-  // is pressed, including 'right' ('l') and 'brake' ('o')
+  // is pressed, including 'right' ('l') and 'brake' ('o'), 
+  // or any of player 1's keys.
   bat2SpeedX -= 1;
 
   if (e.key == 'l') {
