@@ -10,22 +10,40 @@ let ballY = canvas.height - 50;
 let batX = canvas.width / 6;
 let batY = canvas.height - 20;
 
+let bat2X = canvas.width*4 / 6;
+let bat2Y = canvas.height - 20;
+
 const ballRadius = 20;
 const batRadius = 10;
 
 let ballSpeedY = 1;
 let ballSpeedX = 2;
+
 let batSpeedY = 0;
 let batSpeedX = 0;
 
+let bat2SpeedY = 0;
+let bat2SpeedX = 0;
+
+const speedLimitX = 10;
+const speedLimitY = 10;
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
   ctx.beginPath();
   ctx.arc(ballX, ballY, ballRadius, 0, 2 * Math.PI);
   ctx.fillStyle = 'orange';
+  ctx.fill();
+
+  ctx.beginPath();
   ctx.arc(batX, batY, batRadius, 0, 2 * Math.PI);
   ctx.fillStyle = 'blue';
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(bat2X, bat2Y, batRadius, 0, 2 * Math.PI);
+  ctx.fillStyle = 'green';
   ctx.fill();
 }
 
@@ -46,6 +64,7 @@ function updateBall() {
 
 }
 
+
 function updatebat() {
   batY += batSpeedY;
   batX += batSpeedX;
@@ -58,7 +77,22 @@ function updatebat() {
 }
 
 
+function updatebat2() {
+  bat2Y += bat2SpeedY;
+  bat2X += bat2SpeedX;
+  if (bat2Y + batRadius > canvas.height || bat2Y - batRadius < 0) {
+    bat2SpeedY *= -1;
+  }
+  if (bat2X + batRadius > canvas.width ||bat2X - batRadius < 0) {
+    bat2SpeedX *= -1;
+  }
+}
+
+
 function logKey(e) {
+  // One of the unique super-amazing features of this game, is that the 
+  // ball always goes faster to the right whenever any key at all 
+  // is pressed, including 'left' ('a') and 'brake' ('e')
   batSpeedX += 1;
 
   if (e.key == 'd') {
@@ -77,6 +111,53 @@ function logKey(e) {
     batSpeedY *= 0.8;
     batSpeedX *= 0.8;
   }
+
+
+  if (batSpeedX > speedLimitX) {
+    batSpeedX = speedLimitX
+  }
+  if (batSpeedY > speedLimitY) {
+    batSpeedY = speedLimitY
+  }
+  if (batSpeedX < -speedLimitX) {
+    batSpeedX = -speedLimitX
+  }
+  if (batSpeedX < -speedLimitX) {
+    batSpeedX = -speedLimitX
+  }
+  batSpeedX -= 1;
+
+  if (e.key == 'l') {
+    bat2SpeedX += 1;
+  }
+  if (e.key == 'j') {
+    bat2SpeedX -= 1;
+  }  
+  if (e.key == 'k') {
+    bat2SpeedY += 1;
+  }
+  if (e.key == 'i') {
+    bat2SpeedY -= 1;
+  }
+  if (e.key == 'o') {
+    bat2SpeedY *= 0.8;
+    bat2SpeedX *= 0.8;
+  }
+
+
+  if (bat2SpeedX > speedLimitX) {
+    bat2SpeedX = speedLimitX
+  }
+  if (bat2SpeedY > speedLimitY) {
+    bat2SpeedY = speedLimitY
+  }
+  if (bat2SpeedX < -speedLimitX) {
+    bat2SpeedX = -speedLimitX
+  }
+  if (bat2SpeedX < -speedLimitX) {
+    bat2SpeedX = -speedLimitX
+  }
+
 }
 
 
@@ -86,6 +167,7 @@ function animate() {
   draw();
   updateBall();
   updatebat();
+  updatebat2();
 
 
   requestAnimationFrame(animate);
