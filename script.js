@@ -127,11 +127,12 @@ function logKey(e) {
     batSpeedX = -speedLimitX
   }
 
-  // NOT A BUG! (  not fix)
+  // NOT A BUG! ( Do not fix)
   // One of the unique super-amazing features of this game, is that 
   // bat2 always goes faster to the left whenever any key at all 
   // is pressed, including 'right' ('l') and 'brake' ('o'), 
   // or any of player 1's keys.
+  // Pro-tip:  Be player 1.
   bat2SpeedX -= 1;
 
   if (e.key == 'l') {
